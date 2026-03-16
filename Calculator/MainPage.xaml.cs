@@ -1,4 +1,6 @@
-﻿namespace Calculator
+﻿using System.Diagnostics;
+
+namespace Calculator
 {
     public partial class MainPage : ContentPage
     {
@@ -8,18 +10,140 @@
             InitializeComponent();
         }
 
-        private void NumberButtons(object sender, EventArgs e)
-        { 
-           Button button = (Button)sender;
+        private double accumulator = 0;
+        private double operand = 0;
+        private string operation = "";
 
-           EntryResult.Text += button.Text;
-        }
 
-        private void OperatorButtons(object sender, EventArgs e) 
+        private void NumberButton(object sender, EventArgs e)
         {
-        Button button = ( Button )sender; 
+            Button button = (Button)sender;
+            operand = Convert.ToDouble(button.Text);
+            Debug.WriteLine("Operand: " + operand);
+            Debug.WriteLine("Accumulator: " + accumulator);
+            Debug.WriteLine("Operation: " + operation);
 
-        EntryCalculations.Text += button.Text;
+            EntryCalculations.Text = EntryCalculations.Text + button.Text;
+            EntryResult.Text = operand.ToString();
         }
+
+
+        private void OperatorButton(object sender, EventArgs e)
+        {
+            Debug.WriteLine("OperatorButton triggered");
+            Button button = (Button)sender;
+            Debug.WriteLine("Operator: " + button.Text);
+            Debug.WriteLine("Before calculation:");
+            Debug.WriteLine("Accumulator: " + accumulator);
+            Debug.WriteLine("Operand: " + operand);
+
+            if (operation != "")
+            {
+                string text = button.Text;
+                MultibleOperators(text);
+            }
+            else
+            {
+                accumulator = operand;
+                operand = 0;
+                operation = button.Text;
+            }
+
+            
+
+            EntryCalculations.Text = EntryCalculations.Text + $" {operation} ";
+        }
+
+        private void MultibleOperators(string text)
+        {
+            switch (operation)
+            {
+                case "+":
+                    accumulator += operand;
+                    break;
+                case "-":
+                    accumulator -= operand;
+                    break;
+                case "*":
+                    accumulator *= operand;
+                    break;
+                case "/":
+                    if (operand == 0) // Hantera division med noll
+                    {
+                        DisplayAlert("Fel!", "Division med noll är ej tillåtet.", "OK");
+                        Clear();
+                        return;
+                    }
+                    accumulator /= operand;
+                    break;
+            }
+            operand = 0;
+            operation = text;
+        }
+
+
+        private void EqualButton(object sender, EventArgs e)
+        {
+            Calculate();
+
+            EntryResult.Text = accumulator.ToString();
+            EntryCalculations.Text = accumulator.ToString();
+
+            operation = "";
+            operand = 0;
+        }
+
+
+        private void Calculate()
+        {
+            switch (operation)
+            {
+                case "+":
+                    accumulator += operand;
+                    break;
+                case "-":
+                    accumulator -= operand;
+                    break;
+                case "*":
+                    accumulator *= operand;
+                    break;
+                case "/":
+                    if (operand == 0) // Hantera division med noll
+                    {
+                        DisplayAlert("Fel!", "Division med noll är ej tillåtet.", "OK");
+                        Clear();
+                        return;
+                    }
+                    accumulator /= operand;
+                    break;
+            }
+
+            operand = 0;
+        }
+
+        private void ClearButton(object sender, EventArgs e)
+        {
+            Clear();
+        }
+
+        private void Clear()
+        {
+            accumulator = 0;
+            operand = 0;
+            operation = "";
+            EntryCalculations.Text = "";
+            EntryResult.Text = "0";
+        }
+
+        private void StoreInMemoryButton(object sender, EventArgs e)
+        {
+            EntryCalculations.Text = "Kommande funktion";
+        }
+
+        private void CatchFromMemoryButton(object sender, EventArgs e)
+        {
+            EntryCalculations.Text = "Kommande funktion";
+        }
+
     }
 }
