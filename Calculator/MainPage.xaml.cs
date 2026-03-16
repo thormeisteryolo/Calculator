@@ -13,29 +13,35 @@ namespace Calculator
         private double accumulator = 0;
         private double operand = 0;
         private string operation = "";
+        private string totalVal = "";
+        private bool Isnegative = false;
 
 
         private void NumberButton(object sender, EventArgs e)
         {
             Button button = (Button)sender;
-            operand = Convert.ToDouble(button.Text);
-            Debug.WriteLine("Operand: " + operand);
-            Debug.WriteLine("Accumulator: " + accumulator);
-            Debug.WriteLine("Operation: " + operation);
+            string val = totalVal + button.Text;
+            totalVal = val;
+
+            if (Isnegative == false)
+            {
+                operand = Convert.ToDouble(totalVal);
+            }
+            else
+            {
+                operand = -Convert.ToDouble(totalVal);
+            }
 
             EntryCalculations.Text = EntryCalculations.Text + button.Text;
-            EntryResult.Text = operand.ToString();
+            
+            EntryResult.Text = Convert.ToString(operand);
         }
 
 
         private void OperatorButton(object sender, EventArgs e)
         {
-            Debug.WriteLine("OperatorButton triggered");
             Button button = (Button)sender;
-            Debug.WriteLine("Operator: " + button.Text);
-            Debug.WriteLine("Before calculation:");
-            Debug.WriteLine("Accumulator: " + accumulator);
-            Debug.WriteLine("Operand: " + operand);
+            
 
             if (operation != "")
             {
@@ -47,11 +53,13 @@ namespace Calculator
                 accumulator = operand;
                 operand = 0;
                 operation = button.Text;
+                totalVal = "";
             }
 
             
-
+            Isnegative = false;
             EntryCalculations.Text = EntryCalculations.Text + $" {operation} ";
+            EntryResult.Text = Convert.ToString(operand);
         }
 
         private void MultibleOperators(string text)
@@ -120,7 +128,32 @@ namespace Calculator
 
             operand = 0;
         }
-
+        private void NegativeValue(object sender, EventArgs e)
+        {
+            double posval = 0;
+            if (Isnegative == false)
+            {
+                posval = operand;
+                operand = -operand;
+                Isnegative = true;
+            }
+            else
+            {
+                operand = Math.Abs(operand);
+                Isnegative = false;
+            }
+            EntryResult.Text = operand.ToString();
+        }
+        private void PressedOnButton(object sender, EventArgs e)
+        {
+            Button button = (Button)sender;
+            button.BackgroundColor = Colors.DimGray;
+        }
+        private void ReleaseButton(object sender, EventArgs e)
+        {
+            Button button = (Button)sender;
+            button.BackgroundColor = Colors.LightGray;
+        }
         private void ClearButton(object sender, EventArgs e)
         {
             Clear();
@@ -133,6 +166,7 @@ namespace Calculator
             operation = "";
             EntryCalculations.Text = "";
             EntryResult.Text = "0";
+            totalVal = "";
         }
 
         private void StoreInMemoryButton(object sender, EventArgs e)

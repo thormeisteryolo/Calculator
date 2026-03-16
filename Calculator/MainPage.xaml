@@ -29,32 +29,68 @@
                HorizontalTextAlignment="End"/>
 
         <!-- Rad 1 -->
-        <Button Grid.Row="2" Grid.Column="0" Text="C" Clicked="ClearButton" />
-        <Button Grid.Row="2" Grid.Column="1" Text="M+" Clicked="StoreInMemoryButton" />
-        <Button Grid.Row="2" Grid.Column="2" Text="M-" Clicked="CatchFromMemoryButton" />
-        <Button Grid.Row="2" Grid.Column="3" Text="/" Clicked="OperatorButton" />
+        <Button BackgroundColor="LightGray" Grid.Row="2" Grid.Column="0" Text="C" 
+                Clicked="ClearButton" Pressed="PressedOnButton" Released="ReleaseButton"/>
+
+        <Button BackgroundColor="LightGray" Grid.Row="2" Grid.Column="1" Text="M+" 
+                Clicked="StoreInMemoryButton" Pressed="PressedOnButton" Released="ReleaseButton"/>
+
+        <Button BackgroundColor="LightGray" Grid.Row="2" Grid.Column="2" Text="M-" 
+                Clicked="CatchFromMemoryButton" Pressed="PressedOnButton" Released="ReleaseButton"/>
+
+        <Button BackgroundColor="LightGray" Grid.Row="2" Grid.Column="3" Text="/" 
+                Clicked="OperatorButton" Pressed="PressedOnButton" Released="ReleaseButton"/>
 
         <!-- Rad 2 -->
-        <Button Grid.Row="3" Grid.Column="0" Text="7" Clicked="NumberButton" />
-        <Button Grid.Row="3" Grid.Column="1" Text="8" Clicked="NumberButton" />
-        <Button Grid.Row="3" Grid.Column="2" Text="9" Clicked="NumberButton" />
-        <Button Grid.Row="3" Grid.Column="3" Text="*" Clicked="OperatorButton" />
+        <Button BackgroundColor="LightGray" Grid.Row="3" Grid.Column="0" Text="7" 
+                Clicked="NumberButton" Pressed="PressedOnButton" Released="ReleaseButton"/>
+        
+        <Button BackgroundColor="LightGray" Grid.Row="3" Grid.Column="1" Text="8" 
+                Clicked="NumberButton" Pressed="PressedOnButton" Released="ReleaseButton"/>
+        
+        <Button BackgroundColor="LightGray" Grid.Row="3" Grid.Column="2" Text="9" 
+                Clicked="NumberButton" Pressed="PressedOnButton" Released="ReleaseButton"/>
+        
+        <Button BackgroundColor="LightGray" Grid.Row="3" Grid.Column="3" Text="*" 
+                Clicked="OperatorButton" Pressed="PressedOnButton" Released="ReleaseButton"/>
 
         <!-- Rad 3 -->
-        <Button Grid.Row="4" Grid.Column="0" Text="4" Clicked="NumberButton" />
-        <Button Grid.Row="4" Grid.Column="1" Text="5" Clicked="NumberButton" />
-        <Button Grid.Row="4" Grid.Column="2" Text="6" Clicked="NumberButton" />
-        <Button Grid.Row="4" Grid.Column="3" Text="-" Clicked="OperatorButton" />
+        <Button BackgroundColor="LightGray" Grid.Row="4" Grid.Column="0" Text="4" 
+                Clicked="NumberButton" Pressed="PressedOnButton" Released="ReleaseButton"/>
+        
+        <Button BackgroundColor="LightGray" Grid.Row="4" Grid.Column="1" Text="5" 
+                Clicked="NumberButton" Pressed="PressedOnButton" Released="ReleaseButton"/>
+        
+        <Button BackgroundColor="LightGray" Grid.Row="4" Grid.Column="2" Text="6" 
+                Clicked="NumberButton" Pressed="PressedOnButton" Released="ReleaseButton"/>
+        
+        <Button BackgroundColor="LightGray" Grid.Row="4" Grid.Column="3" Text="-" 
+                Clicked="OperatorButton" Pressed="PressedOnButton" Released="ReleaseButton"/>
 
         <!-- Rad 4 -->
-        <Button Grid.Row="5" Grid.Column="0" Text="1" Clicked="NumberButton" />
-        <Button Grid.Row="5" Grid.Column="1" Text="2" Clicked="NumberButton" />
-        <Button Grid.Row="5" Grid.Column="2" Text="3" Clicked="NumberButton" />
-        <Button Grid.Row="5" Grid.Column="3" Text="+" Clicked="OperatorButton" />
+        <Button BackgroundColor="LightGray" Grid.Row="5" Grid.Column="0" Text="1" 
+                Clicked="NumberButton" Pressed="PressedOnButton" Released="ReleaseButton"/>
+        
+        <Button BackgroundColor="LightGray" Grid.Row="5" Grid.Column="1" Text="2" 
+                Clicked="NumberButton" Pressed="PressedOnButton" Released="ReleaseButton"/>
+        
+        <Button BackgroundColor="LightGray" Grid.Row="5" Grid.Column="2" Text="3" 
+                Clicked="NumberButton" Pressed="PressedOnButton" Released="ReleaseButton"/>
+        
+        <Button BackgroundColor="LightGray" Grid.Row="5" Grid.Column="3" Text="+" 
+                Clicked="OperatorButton" Pressed="PressedOnButton" Released="ReleaseButton"/>
 
         <!-- Rad 5 -->
-        <Button Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" Text="0" Clicked="NumberButton"  />
-        <Button Grid.Row="6" Grid.Column="2" Text="." Clicked="NumberButton" />
-        <Button Grid.Row="6" Grid.Column="3" Text="=" Clicked="EqualButton" />
+        <Button BackgroundColor="LightGray" Grid.Row="6" Grid.Column="0" Text="-/+"
+                Clicked="NegativeValue" Pressed="PressedOnButton" Released="ReleaseButton"/>
+
+        <Button BackgroundColor="LightGray" Grid.Row="6" Grid.Column="1" Text="0" 
+                Clicked="NumberButton"  Pressed="PressedOnButton" Released="ReleaseButton"/>
+        
+        <Button BackgroundColor="LightGray" Grid.Row="6" Grid.Column="2" Text="." 
+                Clicked="NumberButton" Pressed="PressedOnButton" Released="ReleaseButton"/>
+        
+        <Button BackgroundColor="LightGray" Grid.Row="6" Grid.Column="3" Text="=" 
+                Clicked="EqualButton" Pressed="PressedOnButton" Released="ReleaseButton"/>
     </Grid>
 </ContentPage>
