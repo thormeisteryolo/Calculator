@@ -14,7 +14,7 @@ namespace Calculator
         private double operand = 0;
         private string operation = "";
         private string totalVal = "";
-        private bool Isnegative = false;
+        private string snapshot = "";
 
 
         private void NumberButton(object sender, EventArgs e)
@@ -23,7 +23,7 @@ namespace Calculator
             string val = totalVal + button.Text;
             totalVal = val;
 
-            if (Isnegative == false)
+            if (operand >= 0)
             {
                 operand = Convert.ToDouble(totalVal);
             }
@@ -32,9 +32,8 @@ namespace Calculator
                 operand = -Convert.ToDouble(totalVal);
             }
 
-            EntryCalculations.Text = EntryCalculations.Text + button.Text;
+            EntryCalculations.Text = snapshot + operand;
             
-            EntryResult.Text = Convert.ToString(operand);
         }
 
 
@@ -55,11 +54,8 @@ namespace Calculator
                 operation = button.Text;
                 totalVal = "";
             }
-
-            
-            Isnegative = false;
-            EntryCalculations.Text = EntryCalculations.Text + $" {operation} ";
-            EntryResult.Text = Convert.ToString(operand);
+            snapshot = EntryCalculations.Text + operation;
+            EntryCalculations.Text = snapshot + operand;
         }
 
         private void MultibleOperators(string text)
@@ -87,6 +83,7 @@ namespace Calculator
             }
             operand = 0;
             operation = text;
+            totalVal = "";
         }
 
 
@@ -130,19 +127,15 @@ namespace Calculator
         }
         private void NegativeValue(object sender, EventArgs e)
         {
-            double posval = 0;
-            if (Isnegative == false)
+            if (operand > 0)
             {
-                posval = operand;
                 operand = -operand;
-                Isnegative = true;
             }
             else
             {
                 operand = Math.Abs(operand);
-                Isnegative = false;
             }
-            EntryResult.Text = operand.ToString();
+            EntryCalculations.Text = snapshot + operand;
         }
         private void PressedOnButton(object sender, EventArgs e)
         {
@@ -152,7 +145,7 @@ namespace Calculator
         private void ReleaseButton(object sender, EventArgs e)
         {
             Button button = (Button)sender;
-            button.BackgroundColor = Colors.LightGray;
+            button.BackgroundColor = Colors.DarkCyan;
         }
         private void ClearButton(object sender, EventArgs e)
         {
