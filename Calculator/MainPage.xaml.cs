@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 
+
 namespace Calculator
 {
     public partial class MainPage : ContentPage
@@ -13,25 +14,25 @@ namespace Calculator
         private double accumulator = 0;
         private double operand = 0;
         private string operation = "";
-        private string totalVal = "";
+        private string totalVal = "0";
         private string snapshot = "";
-
+        private Color buttonColor;
 
         private void NumberButton(object sender, EventArgs e)
         {
             Button button = (Button)sender;
-            string val = totalVal + button.Text;
-            totalVal = val;
+            string val = totalVal + button.Text;  
+                totalVal = val;
 
-            if (operand >= 0)
-            {
-                operand = Convert.ToDouble(totalVal);
-            }
-            else
-            {
-                operand = -Convert.ToDouble(totalVal);
-            }
-
+                if (operand >= 0)
+                {
+                    operand = Convert.ToDouble(totalVal);
+                }
+                else
+                {
+                    operand = -Convert.ToDouble(totalVal);
+                }
+            
             EntryCalculations.Text = snapshot + operand;
             
         }
@@ -91,8 +92,6 @@ namespace Calculator
         {
             Calculate();
 
-            EntryResult.Text = accumulator.ToString();
-            EntryCalculations.Text = accumulator.ToString();
 
             operation = "";
             operand = 0;
@@ -101,28 +100,35 @@ namespace Calculator
 
         private void Calculate()
         {
-            switch (operation)
+            if (accumulator == 0)
             {
-                case "+":
-                    accumulator += operand;
-                    break;
-                case "-":
-                    accumulator -= operand;
-                    break;
-                case "*":
-                    accumulator *= operand;
-                    break;
-                case "/":
-                    if (operand == 0) // Hantera division med noll
-                    {
-                        DisplayAlert("Fel!", "Division med noll är ej tillåtet.", "OK");
-                        Clear();
-                        return;
-                    }
-                    accumulator /= operand;
-                    break;
+                EntryResult.Text = Convert.ToString(operand);
             }
-
+            else
+            {
+                switch (operation)
+                {
+                    case "+":
+                        accumulator += operand;
+                        break;
+                    case "-":
+                        accumulator -= operand;
+                        break;
+                    case "*":
+                        accumulator *= operand;
+                        break;
+                    case "/":
+                        if (operand == 0) // Hantera division med noll
+                        {
+                            DisplayAlert("Fel!", "Division med noll är ej tillåtet.", "OK");
+                            Clear();
+                            return;
+                        }
+                        accumulator /= operand;
+                        break;
+                }
+                EntryResult.Text = Convert.ToString(accumulator);
+            }
             operand = 0;
         }
         private void NegativeValue(object sender, EventArgs e)
@@ -140,12 +146,13 @@ namespace Calculator
         private void PressedOnButton(object sender, EventArgs e)
         {
             Button button = (Button)sender;
-            button.BackgroundColor = Colors.DimGray;
+            buttonColor = button.BackgroundColor;
+            button.BackgroundColor = BackgroundColor.WithHue(0.5F);
         }
         private void ReleaseButton(object sender, EventArgs e)
         {
             Button button = (Button)sender;
-            button.BackgroundColor = Colors.DarkCyan;
+            button.BackgroundColor = buttonColor;
         }
         private void ClearButton(object sender, EventArgs e)
         {

@@ -87,10 +87,10 @@
         <Button BackgroundColor="LightGray" Grid.Row="6" Grid.Column="1" Text="0" 
                 Clicked="NumberButton"  Pressed="PressedOnButton" Released="ReleaseButton"/>
         
-        <Button BackgroundColor="LightGray" Grid.Row="6" Grid.Column="2" Text="." 
+        <Button BackgroundColor="LightGray" Grid.Row="6" Grid.Column="2" Text="," 
                 Clicked="NumberButton" Pressed="PressedOnButton" Released="ReleaseButton"/>
         
-        <Button BackgroundColor="LightGray" Grid.Row="6" Grid.Column="3" Text="=" 
+        <Button BackgroundColor="LimeGreen" Grid.Row="6" Grid.Column="3" Text="=" 
                 Clicked="EqualButton" Pressed="PressedOnButton" Released="ReleaseButton"/>
     </Grid>
 </ContentPage>
