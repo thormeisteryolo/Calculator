@@ -16,11 +16,11 @@ namespace Calculator
         private string operation = "";
         private string totalVal = "0";
         private string snapshot = "";
-        private Color buttonColor;
 
         private void NumberButton(object sender, EventArgs e)
         {
             Button button = (Button)sender;
+
             string val = totalVal + button.Text;  
                 totalVal = val;
 
@@ -143,17 +143,7 @@ namespace Calculator
             }
             EntryCalculations.Text = snapshot + operand;
         }
-        private void PressedOnButton(object sender, EventArgs e)
-        {
-            Button button = (Button)sender;
-            buttonColor = button.BackgroundColor;
-            button.BackgroundColor = BackgroundColor.WithHue(0.5F);
-        }
-        private void ReleaseButton(object sender, EventArgs e)
-        {
-            Button button = (Button)sender;
-            button.BackgroundColor = buttonColor;
-        }
+
         private void ClearButton(object sender, EventArgs e)
         {
             Clear();
@@ -171,7 +161,7 @@ namespace Calculator
 
         private void StoreInMemoryButton(object sender, EventArgs e)
         {
-            EntryCalculations.Text = "Kommande funktion";
+           
         }
 
         private void CatchFromMemoryButton(object sender, EventArgs e)
