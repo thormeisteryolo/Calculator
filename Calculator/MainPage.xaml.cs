@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 
+
 namespace Calculator
 {
     public partial class MainPage : ContentPage
@@ -13,29 +14,34 @@ namespace Calculator
         private double accumulator = 0;
         private double operand = 0;
         private string operation = "";
-
+        private string totalVal = "0";
+        private string snapshot = "";
 
         private void NumberButton(object sender, EventArgs e)
         {
             Button button = (Button)sender;
-            operand = Convert.ToDouble(button.Text);
-            Debug.WriteLine("Operand: " + operand);
-            Debug.WriteLine("Accumulator: " + accumulator);
-            Debug.WriteLine("Operation: " + operation);
 
-            EntryCalculations.Text = EntryCalculations.Text + button.Text;
-            EntryResult.Text = operand.ToString();
+            string val = totalVal + button.Text;  
+                totalVal = val;
+
+                if (operand >= 0)
+                {
+                    operand = Convert.ToDouble(totalVal);
+                }
+                else
+                {
+                    operand = -Convert.ToDouble(totalVal);
+                }
+            
+            EntryCalculations.Text = snapshot + operand;
+            
         }
 
 
         private void OperatorButton(object sender, EventArgs e)
         {
-            Debug.WriteLine("OperatorButton triggered");
             Button button = (Button)sender;
-            Debug.WriteLine("Operator: " + button.Text);
-            Debug.WriteLine("Before calculation:");
-            Debug.WriteLine("Accumulator: " + accumulator);
-            Debug.WriteLine("Operand: " + operand);
+            
 
             if (operation != "")
             {
@@ -47,11 +53,10 @@ namespace Calculator
                 accumulator = operand;
                 operand = 0;
                 operation = button.Text;
+                totalVal = "";
             }
-
-            
-
-            EntryCalculations.Text = EntryCalculations.Text + $" {operation} ";
+            snapshot = EntryCalculations.Text + operation;
+            EntryCalculations.Text = snapshot + operand;
         }
 
         private void MultibleOperators(string text)
@@ -79,6 +84,7 @@ namespace Calculator
             }
             operand = 0;
             operation = text;
+            totalVal = "";
         }
 
 
@@ -86,8 +92,6 @@ namespace Calculator
         {
             Calculate();
 
-            EntryResult.Text = accumulator.ToString();
-            EntryCalculations.Text = accumulator.ToString();
 
             operation = "";
             operand = 0;
@@ -96,29 +100,48 @@ namespace Calculator
 
         private void Calculate()
         {
-            switch (operation)
+            if (accumulator == 0)
             {
-                case "+":
-                    accumulator += operand;
-                    break;
-                case "-":
-                    accumulator -= operand;
-                    break;
-                case "*":
-                    accumulator *= operand;
-                    break;
-                case "/":
-                    if (operand == 0) // Hantera division med noll
-                    {
-                        DisplayAlert("Fel!", "Division med noll är ej tillåtet.", "OK");
-                        Clear();
-                        return;
-                    }
-                    accumulator /= operand;
-                    break;
+                EntryResult.Text = Convert.ToString(operand);
             }
-
+            else
+            {
+                switch (operation)
+                {
+                    case "+":
+                        accumulator += operand;
+                        break;
+                    case "-":
+                        accumulator -= operand;
+                        break;
+                    case "*":
+                        accumulator *= operand;
+                        break;
+                    case "/":
+                        if (operand == 0) // Hantera division med noll
+                        {
+                            DisplayAlert("Fel!", "Division med noll är ej tillåtet.", "OK");
+                            Clear();
+                            return;
+                        }
+                        accumulator /= operand;
+                        break;
+                }
+                EntryResult.Text = Convert.ToString(accumulator);
+            }
             operand = 0;
+        }
+        private void NegativeValue(object sender, EventArgs e)
+        {
+            if (operand > 0)
+            {
+                operand = -operand;
+            }
+            else
+            {
+                operand = Math.Abs(operand);
+            }
+            EntryCalculations.Text = snapshot + operand;
         }
 
         private void ClearButton(object sender, EventArgs e)
@@ -133,11 +156,12 @@ namespace Calculator
             operation = "";
             EntryCalculations.Text = "";
             EntryResult.Text = "0";
+            totalVal = "";
         }
 
         private void StoreInMemoryButton(object sender, EventArgs e)
         {
-            EntryCalculations.Text = "Kommande funktion";
+           
         }
 
         private void CatchFromMemoryButton(object sender, EventArgs e)
