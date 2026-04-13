@@ -20,8 +20,12 @@ namespace Calculator
         private void NumberButton(object sender, EventArgs e)
         {
             Button button = (Button)sender;
+            if (button.Text == "," && totalVal.Contains(","))
+            {
+                return;
+            }
 
-            string val = totalVal + button.Text;  
+                string val = totalVal + button.Text;
                 totalVal = val;
 
                 if (operand >= 0)
@@ -32,9 +36,10 @@ namespace Calculator
                 {
                     operand = -Convert.ToDouble(totalVal);
                 }
+
+
             
-            EntryCalculations.Text = snapshot + operand;
-            
+             EntryCalculations.Text = snapshot + operand;
         }
 
 
@@ -157,6 +162,7 @@ namespace Calculator
             EntryCalculations.Text = "";
             EntryResult.Text = "0";
             totalVal = "";
+            snapshot = "";
         }
 
         private void StoreInMemoryButton(object sender, EventArgs e)
